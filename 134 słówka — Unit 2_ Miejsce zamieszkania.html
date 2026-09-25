@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>134 słówka — Unit 2: Miejsce zamieszkania</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F1F5F2;
+    --surface: #FFFFFF;
+    --surface-2: #E7EFE9;
+    --ink: #17241D;
+    --muted: #5C6F64;
+    --accent: #2F6F4F;
+    --accent-ink: #FFFFFF;
+    --good: #2F8F5B;
+    --good-bg: #E4F4EA;
+    --bad: #C1473A;
+    --bad-bg: #FBE9E6;
+    --highlight: #E8B93A;
+    --border: #D8E3DC;
+    --shadow: 0 1px 2px rgba(23,36,29,0.06), 0 8px 24px rgba(23,36,29,0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101B15;
+      --surface: #17251C;
+      --surface-2: #1E2F24;
+      --ink: #EAF2EC;
+      --muted: #93A69B;
+      --accent: #5FAE84;
+      --accent-ink: #0C1710;
+      --good: #5FBE86;
+      --good-bg: #17301F;
+      --bad: #E28579;
+      --bad-bg: #331E1B;
+      --highlight: #E8B93A;
+      --border: #26382D;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101B15;
+    --surface: #17251C;
+    --surface-2: #1E2F24;
+    --ink: #EAF2EC;
+    --muted: #93A69B;
+    --accent: #5FAE84;
+    --accent-ink: #0C1710;
+    --good: #5FBE86;
+    --good-bg: #17301F;
+    --bad: #E28579;
+    --bad-bg: #331E1B;
+    --highlight: #E8B93A;
+    --border: #26382D;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+  h1, h2, h3, .num, .brand {
+    font-family: "Space Grotesk", "Inter", sans-serif;
+  }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 28px 18px 60px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    gap: 12px;
+  }
+  .brand-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+  }
+  .brand-title b { color: var(--ink); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 28px;
+  }
+
+  /* ---- START SCREEN ---- */
+  .hero {
+    text-align: left;
+    padding: 6px 4px 26px;
+  }
+  .hero .num {
+    font-size: 84px;
+    font-weight: 700;
+    line-height: 0.95;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .hero .num-label {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 46ch;
+    margin-top: 8px;
+  }
+  .section-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin: 22px 0 10px;
+  }
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--ink);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 420px) {
+    .cat-grid { grid-template-columns: 1fr; }
+    .hero .num { font-size: 64px; }
+  }
+  .cat-chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .cat-chip small { color: var(--muted); font-weight: 400; }
+  .cat-chip.active {
+    border-color: var(--accent);
+    background: var(--good-bg);
+  }
+  .cat-chip .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+  .cat-chip.active .dot { background: var(--accent); }
+
+  .btn {
+    appearance: none;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 20px;
+    font-family: "Inter", sans-serif;
+    font-size: 15.5px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.08s ease, opacity 0.15s;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    margin-top: 26px;
+  }
+  .btn-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-ghost {
+    background: var(--surface-2);
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  /* ---- QUIZ SCREEN ---- */
+  .progress-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .progress-track {
+    height: 6px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.25s ease;
+  }
+  .cat-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    background: var(--good-bg);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .sentence {
+    font-size: 20px;
+    line-height: 1.55;
+    font-weight: 500;
+    margin-bottom: 26px;
+  }
+  .blank {
+    display: inline-block;
+    min-width: 64px;
+    border-bottom: 2.5px solid var(--accent);
+    color: var(--accent);
+    font-weight: 700;
+    text-align: center;
+    padding: 0 2px;
+  }
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 460px) {
+    .options { grid-template-columns: 1fr; }
+    .sentence { font-size: 18px; }
+  }
+  .option {
+    text-align: left;
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.12s, background 0.12s;
+  }
+  .option:hover:not(:disabled) { border-color: var(--accent); }
+  .option:disabled { cursor: default; }
+  .option.correct {
+    background: var(--good-bg);
+    border-color: var(--good);
+    color: var(--good);
+  }
+  .option.incorrect {
+    background: var(--bad-bg);
+    border-color: var(--bad);
+    color: var(--bad);
+  }
+  .option.reveal {
+    background: var(--good-bg);
+    border-color: var(--good);
+    color: var(--good);
+  }
+  .feedback {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.good { background: var(--good-bg); color: var(--good); }
+  .feedback.bad { background: var(--bad-bg); color: var(--bad); }
+  .feedback b { font-weight: 700; }
+  .feedback .pl { color: var(--muted); display: block; margin-top: 4px; }
+  .feedback.good .pl, .feedback.bad .pl { color: inherit; opacity: 0.85; }
+
+  /* ---- RESULTS SCREEN ---- */
+  .score-hero {
+    text-align: center;
+    padding: 8px 0 8px;
+  }
+  .score-num {
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .score-total { font-size: 24px; color: var(--muted); font-weight: 600; }
+  .score-pct {
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .grade-badge {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: var(--highlight);
+    color: #3A2C05;
+    font-weight: 700;
+    font-size: 13.5px;
+  }
+  .bars {
+    margin-top: 8px;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .bar-row:last-child { border-bottom: none; }
+  .bar-label {
+    font-size: 13px;
+    font-weight: 600;
+    width: 128px;
+    flex-shrink: 0;
+    color: var(--ink);
+  }
+  .bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+  }
+  .bar-fill.weak { background: var(--bad); }
+  .bar-fill.mid { background: var(--highlight); }
+  .bar-pct {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--muted);
+    width: 38px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .review-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .review-item:last-child { border-bottom: none; }
+  .review-sentence { color: var(--muted); margin-bottom: 6px; }
+  .review-answers { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .review-tag {
+    font-weight: 600;
+  }
+  .review-tag.wrong { color: var(--bad); }
+  .review-tag.right { color: var(--good); }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--muted);
+    list-style: none;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before {
+    content: "▸ ";
+  }
+  details[open] summary::before {
+    content: "▾ ";
+  }
+  .hidden { display: none !important; }
+  .muted { color: var(--muted); }
+  .btn-row { display: flex; gap: 10px; margin-top: 22px; }
+  .btn-row .btn { margin-top: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="brand-title"><b>Unit 2 · Miejsce zamieszkania</b> — powtórka słownictwa</div>
+  </div>
+
+  <!-- START SCREEN -->
+  <div id="screen-start" class="card">
+    <div class="hero">
+      <div class="num" id="wordCountDisplay">134</div>
+      <div class="num-label">słówka z całego rozdziału — rodzaje domów, wnętrze i otoczenie domu, sprzęty domowe, prace domowe i przydatne zwroty. Każde pytanie to zdanie z luką — trzeba wybrać właściwe słowo, nie samo tłumaczenie.</div>
+    </div>
+
+    <div class="section-label">Liczba pytań</div>
+    <div class="chip-row" id="lengthChips">
+      <div class="chip" data-len="20">20</div>
+      <div class="chip" data-len="50">50</div>
+      <div class="chip" data-len="90">90</div>
+      <div class="chip active" data-len="134">134 (wszystkie)</div>
+    </div>
+
+    <div class="section-label">Kategorie (kliknij, aby wyłączyć)</div>
+    <div class="cat-grid" id="catGrid"></div>
+
+    <button class="btn btn-primary" id="startBtn">Zaczynam test</button>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="screen-quiz" class="card hidden">
+    <div class="progress-row">
+      <span id="progressText">Pytanie 1/100</span>
+      <span id="scoreLiveText">Wynik: 0</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="cat-tag" id="catTag">Kategoria</div>
+    <div class="sentence" id="sentenceText"></div>
+    <div class="options" id="optionsGrid"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="btn btn-primary hidden" id="nextBtn">Dalej</button>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="screen-results" class="card hidden">
+    <div class="score-hero">
+      <div><span class="score-num" id="finalScore">0</span><span class="score-total" id="finalTotal">/100</span></div>
+      <div class="score-pct" id="finalPct"></div>
+      <div class="grade-badge" id="gradeBadge"></div>
+    </div>
+
+    <div class="section-label">Wynik według kategorii</div>
+    <div class="bars" id="catBars"></div>
+
+    <div class="section-label" style="margin-top:24px;">
+      <details id="reviewDetails">
+        <summary id="reviewSummary">Zobacz błędy</summary>
+      </details>
+    </div>
+    <div id="reviewList"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="restartBtn">Nowy test</button>
+      <button class="btn btn-primary" id="retrySameBtn">Powtórz błędy</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------------------------------------------------------------
+   DATA: 134 words from Unit 2 wordlist, grouped by category.
+   Each item: en (answer as it appears in the sentence blank),
+   pl (Polish translation), sentence (English sentence with ___)
+---------------------------------------------------------------- */
+const DATA = {
+  "Rodzaje domów": [
+    ["apartment", "mieszkanie", "They bought a modern ___ in the city centre."],
+    ["bungalow", "dom parterowy", "My grandparents live in a small ___ with no stairs."],
+    ["caravan", "przyczepa kempingowa", "We spent the summer holiday travelling around in a ___."],
+    ["charming", "uroczy, urokliwy", "The cottage was small but absolutely ___."],
+    ["cottage", "domek wiejski", "They rented a little ___ in the countryside for the weekend."],
+    ["dark", "ciemny", "The basement was cold and ___, so nobody wanted to go down there."],
+    ["detached house", "dom wolnostojący", "They dream of buying a ___ with a big garden."],
+    ["expensive", "drogi, kosztowny", "Flats in the city centre are very ___."],
+    ["flat", "mieszkanie", "She rents a small ___ near the university."],
+    ["huge", "ogromny", "They live in a ___ house with ten rooms."],
+    ["mobile home", "dom mobilny", "They travel around the country living in a ___."],
+    ["modern", "nowoczesny", "The new building has a very ___ design."],
+    ["terraced house", "dom szeregowy", "They bought a ___ in a row of similar houses."],
+    ["tiny", "mały, malutki", "The bathroom in our flat is really ___."],
+    ["ugly", "brzydki", "I think that grey concrete building is really ___."]
+  ],
+  "Zwroty o lokalizacji": [
+    ["an old block of flats", "stary blok mieszkalny", "My grandmother has lived in ___ in the city centre for forty years."],
+    ["a nice part of town", "ładna dzielnica miasta", "They bought a flat in ___, close to the park."],
+    ["the centre of the city", "centrum miasta", "The new shopping mall is right in ___."],
+    ["the countryside", "wieś, tereny wiejskie", "We spent our summer holidays in ___, far from any noise."],
+    ["far from the shops", "daleko od sklepów", "Their new house is ___, so they have to drive everywhere."],
+    ["near a park", "blisko parku", "It's great living ___ — we go jogging every morning."],
+    ["near a forest", "blisko lasu", "Their cottage is ___, so they often go for walks among the trees."],
+    ["near the sea", "blisko morza", "I'd love to live ___ so I could swim every day."],
+    ["far from my school", "daleko od mojej szkoły", "My house is ___, so I have to take the bus."],
+    ["on an island", "na wyspie", "The hotel is located ___ in the middle of the lake."],
+    ["on the edge of town", "na obrzeżach miasta", "Their new house is ___, close to the fields."],
+    ["on the top floor", "na najwyższym piętrze", "Our flat is ___, so we have an amazing view of the city."],
+    ["surrounded by fields", "otoczony polami", "The farmhouse is ___ and forests."],
+    ["with a huge garden", "z ogromnym ogrodem", "They chose a house ___ where the kids can play."],
+    ["a great view", "wspaniały widok", "From the balcony, you can enjoy ___ of the mountains."],
+    ["loads of rooms", "mnóstwo pokoi", "The old mansion has ___, so it's perfect for a big family."],
+    ["plenty of space inside", "dużo miejsca w środku", "The bungalow has ___ and outside, which is great for kids."]
+  ],
+  "Na zewnątrz domu": [
+    ["barbecue", "grill", "We had a ___ in the garden on Saturday evening."],
+    ["café", "kawiarnia", "Let's meet at the ___ on the corner for a coffee."],
+    ["dustbin", "pojemnik na śmieci", "Please put the rubbish in the ___ outside."],
+    ["garage", "garaż", "He keeps his car in the ___ overnight."],
+    ["garden", "ogród", "The children love playing in the ___."],
+    ["hedge", "żywopłot", "A tall green ___ separates our garden from the neighbours."],
+    ["lawn", "trawnik", "My dad mows the ___ every Sunday."],
+    ["plant", "roślina", "She waters every ___ in the garden twice a week."],
+    ["playground", "plac zabaw", "The children ran straight to the ___ after school."],
+    ["swimming pool", "basen", "In summer, we spend hours in the ___ in our garden."]
+  ],
+  "Wewnątrz domu": [
+    ["armchair", "fotel", "Grandpa always sits in his favourite ___ by the fireplace."],
+    ["balcony", "balkon", "We grow herbs in pots on our ___."],
+    ["basement", "piwnica", "They turned the ___ into a home cinema."],
+    ["basin", "umywalka", "He washed his hands in the ___."],
+    ["bath", "wanna", "She likes to relax in a hot ___ after a long day."],
+    ["bathroom", "łazienka", "There are two ___s in our new flat."],
+    ["bedroom", "sypialnia", "My ___ is upstairs, next to my sister's."],
+    ["blanket", "koc", "It was cold, so she wrapped herself in a warm ___."],
+    ["bookcase", "regał na książki", "All his books are neatly arranged on the ___."],
+    ["bunk bed", "łóżko piętrowe", "The twins share a ___ in their room."],
+    ["ceiling", "sufit", "There's a beautiful lamp hanging from the ___."],
+    ["cellar", "piwnica (do przechowywania)", "They keep old furniture and wine in the ___."],
+    ["chair", "krzesło", "Please pull up a ___ and join us."],
+    ["chest of drawers", "komoda", "She keeps her clothes in the ___."],
+    ["cloakroom", "garderoba, szatnia", "Leave your coats in the ___ by the front door."],
+    ["coffee table", "stolik kawowy", "There's a vase of flowers on the ___."],
+    ["corridor", "korytarz", "The bedrooms are along the ___ upstairs."],
+    ["cupboard", "szafka kuchenna", "The plates are kept in the kitchen ___."],
+    ["curtains", "zasłony", "She closed the ___ before going to bed."],
+    ["cushions", "poduszki ozdobne", "There are colourful ___ on the sofa."],
+    ["dining chair", "krzesło do jadalni", "We need six ___s for the dinner party."],
+    ["dining room", "jadalnia", "We only use the ___ for special occasions."],
+    ["dining table", "stół w jadalni", "The whole family gathered around the ___ for dinner."],
+    ["entrance hall", "hol wejściowy", "Take off your shoes in the ___."],
+    ["fireplace", "kominek", "In winter we light a fire in the ___."],
+    ["ground floor", "parter", "The kitchen and living room are on the ___."],
+    ["kitchen", "kuchnia", "Mum is cooking dinner in the ___."],
+    ["living room", "salon", "We watch TV together in the ___ every evening."],
+    ["mirror", "lustro", "She checked her hair in the ___ before leaving."],
+    ["office", "gabinet, biuro", "Dad works from home in his ___ upstairs."],
+    ["pillow", "poduszka", "I always sleep with two ___s."],
+    ["poster", "plakat", "He has a huge film ___ on his bedroom wall."],
+    ["shelf", "półka", "Put the books back on the ___."],
+    ["shower", "prysznic", "I always have a quick ___ in the morning."],
+    ["sideboard", "kredens", "The plates and glasses are stored in the ___."],
+    ["sink", "zlew", "She washed the vegetables in the kitchen ___."],
+    ["sofa", "sofa, kanapa", "We fell asleep on the ___ watching a film."],
+    ["spare bedroom", "dodatkowa sypialnia", "Guests can sleep in the ___ upstairs."],
+    ["stool", "stołek", "He sat on a ___ at the kitchen counter."],
+    ["toilet", "toaleta", "The ___ is just next to the bathroom."],
+    ["wardrobe", "szafa", "She hung her dresses in the ___."]
+  ],
+  "Sprzęty domowe": [
+    ["alarm clock", "budzik", "My ___ rings at seven every morning."],
+    ["central heating", "centralne ogrzewanie", "Our flat has ___, so it's always warm in winter."],
+    ["cooker", "kuchenka", "She cooked dinner on the electric ___."],
+    ["DVD player", "odtwarzacz DVD", "We watched the film on our old ___."],
+    ["freezer", "zamrażarka", "Keep the ice cream in the ___."],
+    ["fridge", "lodówka", "There's some milk in the ___."],
+    ["heater", "grzejnik", "Turn on the ___, it's freezing in here."],
+    ["hairdryer", "suszarka do włosów", "She used a ___ to dry her hair quickly."],
+    ["iron", "żelazko", "He used an ___ to press his shirt."],
+    ["kettle", "czajnik", "I'll put the ___ on for some tea."],
+    ["home cinema", "kino domowe", "They installed a ___ system in the living room."],
+    ["microwave", "kuchenka mikrofalowa", "Just heat the soup in the ___ for two minutes."],
+    ["oven", "piekarnik", "The cake is baking in the ___."],
+    ["sound system", "nagłośnienie", "They have an amazing ___ for parties."],
+    ["washing machine", "pralka", "Put the dirty clothes in the ___."]
+  ],
+  "Prace domowe": [
+    ["clean the bathroom", "sprzątać łazienkę", "It's your turn to ___ this week."],
+    ["cook a meal", "przygotowywać posiłek", "My dad loves to ___ for the whole family on Sundays."],
+    ["do the gardening", "wykonywać prace w ogrodzie", "Every Saturday, Grandma likes to ___."],
+    ["do the ironing", "prasować", "I hate having to ___ my school shirts."],
+    ["do the laundry", "prać, robić pranie", "Can you ___ today? We need clean towels."],
+    ["do the washing up", "zmywać naczynia", "After dinner, it's my brother's turn to ___."],
+    ["help prepare a meal", "pomagać przygotowywać posiłek", "The children like to ___ with their mum."],
+    ["lay the table", "nakrywać do stołu", "Could you ___ before the guests arrive?"],
+    ["load the dishwasher", "załadować zmywarkę", "Please ___ after breakfast."],
+    ["make your bed", "słać łóżko", "You should always ___ before leaving for school."],
+    ["take the rubbish out", "wynosić śmieci", "Don't forget to ___ tonight."],
+    ["tidy your room", "sprzątać pokój", "Mum asked me to ___ before my friends come over."],
+    ["wash the dishes", "zmywać naczynia", "We take turns to ___ after every meal."],
+    ["water the plants", "podlewać rośliny", "Could you ___ while I'm on holiday?"]
+  ],
+  "Reading (str. 18)": [
+    ["furnish", "meblować", "They spent a lot of money to ___ their new flat."],
+    ["redecorate", "zmienić wystrój, odnowić wnętrze", "We're going to ___ the living room this summer."],
+    ["renovate", "odnowić, remontować", "They bought an old cottage and plan to ___ it completely."],
+    ["rent", "wynajmować", "It's cheaper to ___ a flat than to buy one."],
+    ["sell", "sprzedać", "They decided to ___ their house and move abroad."],
+    ["share a room with", "dzielić pokój z", "I have to ___ my younger brother."]
+  ],
+  "Listening (str. 22)": [
+    ["comfortable accommodation", "wygodne zakwaterowanie", "The hotel offers very ___ for a reasonable price."],
+    ["fairy tale", "bajka", "She read her little brother a ___ before bed."],
+    ["furniture shop", "sklep meblowy", "We bought our new sofa at a ___ in town."],
+    ["gas bottle", "butla gazowa", "They use a ___ to cook when camping."],
+    ["huge area", "wielki obszar", "The national park covers a ___ of forest."],
+    ["phone signal", "sygnał telefonu", "There's no ___ up in the mountains."],
+    ["sleep in a tent", "spać w namiocie", "On our camping trip, we had to ___."],
+    ["solar lights", "lampy solarne", "They installed ___ along the garden path."],
+    ["stay in a hotel", "zatrzymać się w hotelu", "We decided to ___ instead of camping this year."]
+  ],
+  "Use of English (str. 23)": [
+    ["bedroom door", "drzwi do sypialni", "Please knock before opening my ___."],
+    ["bike lock", "zapięcie rowerowe", "Always use a ___ to secure your bicycle."],
+    ["car keys", "klucze do samochodu", "I can't find my ___ anywhere!"],
+    ["light switch", "włącznik światła", "The ___ is just next to the door."],
+    ["picture frame", "ramka obrazu", "She put the photo in a nice wooden ___."],
+    ["rubbish bin", "kosz na śmieci", "Throw the paper in the ___."],
+    ["toy box", "pudło na zabawki", "The children keep their toys in a big ___."]
+  ]
+};
+
+const CATS = Object.keys(DATA);
+let ALL_ITEMS = [];
+CATS.forEach(cat => {
+  DATA[cat].forEach(([en, pl, sentence]) => {
+    ALL_ITEMS.push({ en, pl, sentence, cat });
+  });
+});
+
+let selectedCats = new Set(CATS);
+let sessionLen = 134;
+let questions = [];
+let qIndex = 0;
+let score = 0;
+let answered = false;
+let mistakes = [];
+let catStats = {}; // cat -> {correct, total}
+
+/* ---------- helpers ---------- */
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildOptions(item) {
+  const pool = DATA[item.cat].map(x => x[0]).filter(w => w !== item.en);
+  const distractors = shuffle(pool).slice(0, 3);
+  return shuffle([item.en, ...distractors]);
+}
+
+/* ---------- START SCREEN ---------- */
+const catGrid = document.getElementById('catGrid');
+CATS.forEach(cat => {
+  const el = document.createElement('div');
+  el.className = 'cat-chip active';
+  el.innerHTML = `<span><span class="dot"></span> ${cat}</span><small>${DATA[cat].length}</small>`;
+  el.addEventListener('click', () => {
+    if (selectedCats.has(cat)) {
+      if (selectedCats.size > 1) { selectedCats.delete(cat); el.classList.remove('active'); }
+    } else {
+      selectedCats.add(cat); el.classList.add('active');
+    }
+    updateWordCountDisplay();
+  });
+  catGrid.appendChild(el);
+});
+
+function availableCount() {
+  return CATS.filter(c => selectedCats.has(c)).reduce((s, c) => s + DATA[c].length, 0);
+}
+function updateWordCountDisplay() {
+  const avail = availableCount();
+  document.getElementById('wordCountDisplay').textContent = Math.min(sessionLen, avail);
+}
+
+document.querySelectorAll('#lengthChips .chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#lengthChips .chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    sessionLen = parseInt(chip.dataset.len, 10);
+    updateWordCountDisplay();
+  });
+});
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  const pool = ALL_ITEMS.filter(it => selectedCats.has(it.cat));
+  const n = Math.min(sessionLen, pool.length);
+  questions = shuffle(pool).slice(0, n);
+  startSession(questions);
+});
+
+document.getElementById('retrySameBtn').addEventListener('click', () => {
+  if (mistakes.length === 0) {
+    document.getElementById('screen-results').classList.add('hidden');
+    document.getElementById('screen-start').classList.remove('hidden');
+    return;
+  }
+  startSession(shuffle(mistakes));
+});
+
+document.getElementById('restartBtn').addEventListener('click', () => {
+  document.getElementById('screen-results').classList.add('hidden');
+  document.getElementById('screen-start').classList.remove('hidden');
+});
+
+/* ---------- QUIZ SCREEN ---------- */
+function startSession(qs) {
+  questions = qs;
+  qIndex = 0;
+  score = 0;
+  mistakes = [];
+  catStats = {};
+  CATS.forEach(c => catStats[c] = { correct: 0, total: 0 });
+
+  document.getElementById('screen-start').classList.add('hidden');
+  document.getElementById('screen-results').classList.add('hidden');
+  document.getElementById('screen-quiz').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const item = questions[qIndex];
+  document.getElementById('progressText').textContent = `Pytanie ${qIndex + 1}/${questions.length}`;
+  document.getElementById('scoreLiveText').textContent = `Wynik: ${score}`;
+  document.getElementById('progressFill').style.width = `${(qIndex / questions.length) * 100}%`;
+  document.getElementById('catTag').textContent = item.cat;
+
+  const sentenceHtml = item.sentence.replace('___', '<span class="blank">______</span>');
+  document.getElementById('sentenceText').innerHTML = sentenceHtml;
+
+  const opts = buildOptions(item);
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = opt;
+    btn.addEventListener('click', () => selectAnswer(opt, item, btn));
+    grid.appendChild(btn);
+  });
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback';
+  fb.innerHTML = '';
+  document.getElementById('nextBtn').classList.add('hidden');
+}
+
+function selectAnswer(chosen, item, btnEl) {
+  if (answered) return;
+  answered = true;
+  catStats[item.cat].total++;
+
+  const correct = chosen === item.en;
+  const allOptionBtns = document.querySelectorAll('#optionsGrid .option');
+  allOptionBtns.forEach(b => {
+    b.disabled = true;
+    if (b.textContent === item.en) b.classList.add('reveal');
+    if (b === btnEl && !correct) b.classList.add('incorrect');
+  });
+
+  const fb = document.getElementById('feedback');
+  fb.classList.add('show');
+  if (correct) {
+    score++;
+    catStats[item.cat].correct++;
+    fb.classList.add('good');
+    fb.innerHTML = `<b>Dobrze!</b><span class="pl">${item.en} — ${item.pl}</span>`;
+  } else {
+    mistakes.push(item);
+    fb.classList.add('bad');
+    fb.innerHTML = `<b>Poprawna odpowiedź: ${item.en}</b><span class="pl">${item.pl}</span>`;
+  }
+
+  document.getElementById('scoreLiveText').textContent = `Wynik: ${score}`;
+  document.getElementById('nextBtn').classList.remove('hidden');
+}
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  qIndex++;
+  if (qIndex >= questions.length) {
+    showResults();
+  } else {
+    renderQuestion();
+  }
+});
+
+/* ---------- RESULTS SCREEN ---------- */
+function gradeFor(pct) {
+  if (pct >= 95) return "6 — celujący";
+  if (pct >= 85) return "5 — bardzo dobry";
+  if (pct >= 70) return "4 — dobry";
+  if (pct >= 55) return "3 — dostateczny";
+  if (pct >= 40) return "2 — dopuszczający";
+  return "1 — niedostateczny";
+}
+
+function showResults() {
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('screen-quiz').classList.add('hidden');
+  document.getElementById('screen-results').classList.remove('hidden');
+
+  const total = questions.length;
+  const pct = Math.round((score / total) * 100);
+  document.getElementById('finalScore').textContent = score;
+  document.getElementById('finalTotal').textContent = `/${total}`;
+  document.getElementById('finalPct').textContent = `${pct}% poprawnych odpowiedzi`;
+  document.getElementById('gradeBadge').textContent = gradeFor(pct);
+
+  const barsEl = document.getElementById('catBars');
+  barsEl.innerHTML = '';
+  CATS.forEach(cat => {
+    const st = catStats[cat];
+    if (!st || st.total === 0) return;
+    const p = Math.round((st.correct / st.total) * 100);
+    const cls = p >= 75 ? '' : (p >= 45 ? 'mid' : 'weak');
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-label">${cat}</div>
+      <div class="bar-track"><div class="bar-fill ${cls}" style="width:${p}%"></div></div>
+      <div class="bar-pct">${st.correct}/${st.total}</div>
+    `;
+    barsEl.appendChild(row);
+  });
+
+  const reviewSummary = document.getElementById('reviewSummary');
+  const reviewList = document.getElementById('reviewList');
+  const reviewDetails = document.getElementById('reviewDetails');
+  reviewList.innerHTML = '';
+  document.getElementById('retrySameBtn').textContent = mistakes.length ? `Powtórz błędy (${mistakes.length})` : 'Brak błędów 🎉';
+  document.getElementById('retrySameBtn').disabled = mistakes.length === 0;
+
+  if (mistakes.length === 0) {
+    reviewSummary.textContent = 'Brak błędów — świetna robota!';
+    reviewDetails.open = false;
+  } else {
+    reviewSummary.textContent = `Zobacz błędy (${mistakes.length})`;
+    mistakes.forEach(m => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `
+        <div class="review-sentence">${m.sentence.replace('___', '<b>' + m.en + '</b>')}</div>
+        <div class="review-answers"><span class="review-tag right">${m.en}</span><span class="muted">— ${m.pl}</span></div>
+      `;
+      reviewList.appendChild(div);
+    });
+  }
+}
+
+updateWordCountDisplay();
+</script>
+</body>
+</html>
